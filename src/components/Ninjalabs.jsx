@@ -24,7 +24,7 @@ const NinjaLabs = () => {
 
     return (
         <div ref={sectionRef} className="py-24 relative">
-            <div className="max-w-7xl mx-auto px-6">
+            <div className="max-w-7xl mx-auto px-4 md:px-6">
                 <div className={`glass rounded-3xl p-8 md:p-16 border border-indigo-500/10 dark:border-indigo-500/20 relative overflow-hidden scroll-reveal ${isSectionVisible ? 'is-visible' : ''}`}>
 
                     {/* Background blob */}

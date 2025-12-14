@@ -12,7 +12,7 @@ const Footer = () => {
 
     return (
         <footer ref={sectionRef} className="border-t border-gray-200 dark:border-white/10 bg-white dark:bg-[#0B0B15]">
-            <div className="max-w-7xl mx-auto px-6 py-16">
+            <div className="max-w-7xl mx-auto px-4 md:px-6 py-16">
                 <div className={`grid md:grid-cols-5 gap-12 mb-16 scroll-reveal ${isSectionVisible ? 'is-visible' : ''}`}>
                     {/* Brand */}
                     <div className="md:col-span-1">

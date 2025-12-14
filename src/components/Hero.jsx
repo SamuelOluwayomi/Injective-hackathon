@@ -60,7 +60,7 @@ const Hero = () => {
     }, [ctaDelay]);
 
     return (
-        <div className="relative pt-20 pb-20 px-6 min-h-[90vh] flex flex-col justify-center overflow-hidden">
+        <div className="relative pt-20 pb-20 px-4 md:px-6 min-h-[90vh] flex flex-col justify-center overflow-hidden">
             {/* Animated Background Elements */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
                 {/* Gradient Orbs */}

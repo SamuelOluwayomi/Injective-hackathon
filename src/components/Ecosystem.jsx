@@ -12,7 +12,7 @@ const Ecosystem = () => {
 
     return (
         <div ref={sectionRef} className="py-24 bg-white/50 dark:bg-black/20">
-            <div className="max-w-7xl mx-auto px-6">
+            <div className="max-w-7xl mx-auto px-4 md:px-6">
                 <div className={`flex flex-col md:flex-row justify-between items-end mb-16 gap-6 scroll-reveal ${isSectionVisible ? 'is-visible' : ''}`}>
                     <div className="max-w-2xl">
                         <h2 className="text-3xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white">
