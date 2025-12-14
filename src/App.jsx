@@ -1,4 +1,5 @@
 import React, { Suspense, lazy } from 'react';
+import { Analytics } from "@vercel/analytics/react";
 import LoadingFallback from "./components/LoadingFallback";
 
 // Lazy load components for better performance
@@ -30,6 +31,7 @@ export default function App() {
           <Footer />
         </div>
       </Suspense>
+      <Analytics />
     </div>
   );
 }
