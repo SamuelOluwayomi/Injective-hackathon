@@ -2,7 +2,7 @@ import React from 'react';
 import Hero from "./components/Hero";
 import Features from "./components/Features";
 import Ecosystem from "./components/Ecosystem";
-import NinjaLabs from "./components/NinjaLabs";
+import Ninjalabs from "./components/Ninjalabs";
 import Footer from "./components/Footer";
 import ThemeToggle from "./components/ThemeToggle"; // Import ThemeToggle
 
@@ -22,7 +22,7 @@ export default function App() {
         <Hero />
         <Features />
         <Ecosystem />
-        <NinjaLabs />
+        <Ninjalabs />
         <Footer />
       </div>
     </div>
