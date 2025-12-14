@@ -1,10 +1,13 @@
-import React from 'react';
-import Hero from "./components/Hero";
-import Features from "./components/Features";
-import Ecosystem from "./components/Ecosystem";
-import Ninjalabs from "./components/Ninjalabs";
-import Footer from "./components/Footer";
-import ThemeToggle from "./components/ThemeToggle"; // Import ThemeToggle
+import React, { Suspense, lazy } from 'react';
+import LoadingFallback from "./components/LoadingFallback";
+
+// Lazy load components for better performance
+const Hero = lazy(() => import("./components/Hero"));
+const Features = lazy(() => import("./components/Features"));
+const Ecosystem = lazy(() => import("./components/Ecosystem"));
+const Ninjalabs = lazy(() => import("./components/Ninjalabs"));
+const Footer = lazy(() => import("./components/Footer"));
+const ThemeToggle = lazy(() => import("./components/ThemeToggle"));
 
 export default function App() {
   return (
@@ -16,15 +19,17 @@ export default function App() {
         <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-inj-purple/30 dark:bg-inj-purple/20 rounded-full blur-[120px] animate-pulse delay-1000"></div>
       </div>
 
-      <ThemeToggle />
+      <Suspense fallback={<LoadingFallback />}>
+        <ThemeToggle />
 
-      <div className="relative z-10">
-        <Hero />
-        <Features />
-        <Ecosystem />
-        <Ninjalabs />
-        <Footer />
-      </div>
+        <div className="relative z-10">
+          <Hero />
+          <Features />
+          <Ecosystem />
+          <Ninjalabs />
+          <Footer />
+        </div>
+      </Suspense>
     </div>
   );
 }

@@ -207,3 +207,92 @@
     opacity: 1;
     transform: translateX(0);
 }
+
+/* Loading Fallback Animations */
+@keyframes spin-reverse {
+    from { transform: rotate(360deg); }
+    to { transform: rotate(0deg); }
+}
+
+@keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes pulse-glow {
+    0%, 100% { 
+        box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+        transform: scale(1);
+    }
+    50% { 
+        box-shadow: 0 0 30px rgba(147, 51, 234, 0.7);
+        transform: scale(1.05);
+    }
+}
+
+@keyframes bounce-subtle {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+}
+
+@keyframes orbit {
+    from { transform: rotate(0deg) translateX(60px) rotate(0deg); }
+    to { transform: rotate(360deg) translateX(60px) rotate(-360deg); }
+}
+
+@keyframes orbit-delayed {
+    from { transform: rotate(120deg) translateX(60px) rotate(-120deg); }
+    to { transform: rotate(480deg) translateX(60px) rotate(-480deg); }
+}
+
+@keyframes orbit-slow {
+    from { transform: rotate(240deg) translateX(60px) rotate(-240deg); }
+    to { transform: rotate(600deg) translateX(60px) rotate(-600deg); }
+}
+
+@keyframes fade-in-out {
+    0% { opacity: 0; transform: translateY(10px); }
+    10%, 90% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-10px); }
+}
+
+@keyframes progress {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.animate-spin-reverse {
+    animation: spin-reverse 2s linear infinite;
+}
+
+.animate-spin-slow {
+    animation: spin-slow 3s linear infinite;
+}
+
+.animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-bounce-subtle {
+    animation: bounce-subtle 2s ease-in-out infinite;
+}
+
+.animate-orbit {
+    animation: orbit 3s linear infinite;
+}
+
+.animate-orbit-delayed {
+    animation: orbit-delayed 3s linear infinite;
+}
+
+.animate-orbit-slow {
+    animation: orbit-slow 4s linear infinite;
+}
+
+.animate-fade-in-out {
+    animation: fade-in-out 2s ease-in-out;
+}
+
+.animate-progress {
+    animation: progress 2s ease-in-out infinite;
+}
