@@ -153,7 +153,6 @@ const Hero = () => {
 
                             {/* Button content */}
                             <span className="relative z-10 flex items-center gap-3">
-                                <span className="text-2xl animate-bounce">🚀</span>
                                 <span className="tracking-wide">Visit Injective.com</span>
                                 <ExternalLink className="w-6 h-6 group-hover:translate-x-2 group-hover:-translate-y-2 transition-transform duration-300" />
                             </span>

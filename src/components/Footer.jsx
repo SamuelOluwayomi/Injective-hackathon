@@ -4,10 +4,30 @@ const Footer = () => {
     const [sectionRef, isSectionVisible] = useScrollReveal();
 
     const links = {
-        Product: ['DEX', 'Bridge', 'Explorer', 'Staking'],
-        Developers: ['Documentation', 'GitHub', 'SDK', 'API'],
-        Community: ['Discord', 'Twitter', 'Telegram', 'Forum'],
-        Company: ['About', 'Blog', 'Careers', 'Brand']
+        Product: [
+            { name: 'DEX', url: 'https://helixapp.com' },
+            { name: 'Bridge', url: 'https://hub.injective.network/bridge' },
+            { name: 'Explorer', url: 'https://explorer.injective.network' },
+            { name: 'Staking', url: 'https://hub.injective.network/staking' }
+        ],
+        Developers: [
+            { name: 'Documentation', url: 'https://docs.injective.network' },
+            { name: 'GitHub', url: 'https://github.com/InjectiveLabs' },
+            { name: 'SDK', url: 'https://docs.injective.network/develop/tools/injectivets' },
+            { name: 'API', url: 'https://api.injective.network' }
+        ],
+        Community: [
+            { name: 'Discord', url: 'https://discord.gg/injective' },
+            { name: 'Twitter', url: 'https://twitter.com/InjectiveLabs' },
+            { name: 'Telegram', url: 'https://t.me/joininjective' },
+            { name: 'Forum', url: 'https://hub.injective.network/governance' }
+        ],
+        Company: [
+            { name: 'About', url: 'https://injective.com/about' },
+            { name: 'Blog', url: 'https://blog.injective.com' },
+            { name: 'Careers', url: 'https://injective.com/careers' },
+            { name: 'Brand', url: 'https://injective.com/brand' }
+        ]
     };
 
     return (
@@ -30,9 +50,14 @@ const Footer = () => {
                             <h4 className="font-semibold text-gray-900 dark:text-white mb-4">{category}</h4>
                             <ul className="space-y-2">
                                 {items.map((item) => (
-                                    <li key={item}>
-                                        <a href="#" className="text-gray-500 dark:text-gray-400 hover:text-inj-blue dark:hover:text-inj-teal transition-colors text-sm">
-                                            {item}
+                                    <li key={item.name}>
+                                        <a
+                                            href={item.url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-gray-500 dark:text-gray-400 hover:text-inj-blue dark:hover:text-inj-teal transition-colors text-sm"
+                                        >
+                                            {item.name}
                                         </a>
                                     </li>
                                 ))}

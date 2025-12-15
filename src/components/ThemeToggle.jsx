@@ -12,7 +12,7 @@ const ThemeToggle = () => {
             aria-label="Toggle Theme"
         >
             {theme === 'dark' ? (
-                <Sun className="w-6 h-6 text-yellow-400 group-hover:rotate-90 transition-transform duration-500" />
+                <Sun className="w-6 h-6 text-white group-hover:rotate-90 transition-transform duration-500" />
             ) : (
                 <Moon className="w-6 h-6 text-indigo-500 group-hover:-rotate-12 transition-transform duration-500" />
             )}

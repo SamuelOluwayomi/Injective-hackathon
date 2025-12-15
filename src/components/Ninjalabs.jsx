@@ -56,10 +56,15 @@ const NinjaLabs = () => {
                         </div>
 
                         <div className="text-center">
-                            <button className="px-8 py-4 bg-linear-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white rounded-xl font-semibold shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 transition-all hover:-translate-y-1 inline-flex items-center gap-2 group">
+                            <a
+                                href="https://ninjalabs.injective.com"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="px-8 py-4 bg-linear-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white rounded-xl font-semibold shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 transition-all hover:-translate-y-1 inline-flex items-center gap-2 group"
+                            >
                                 Apply to Ninja Labs
                                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>

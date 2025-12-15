@@ -33,34 +33,57 @@ const Ecosystem = () => {
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-6">
-                    {apps.map((app, idx) => (
-                        <a
-                            key={idx}
-                            href={app.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className={`glass-card p-1 group flex flex-col h-full cursor-pointer overflow-hidden relative scroll-reveal ${isSectionVisible ? 'is-visible' : ''} block`}
-                            style={{ transitionDelay: `${0.2 + idx * 0.1}s` }}
-                        >
-                            <div className={`absolute top-0 left-0 w-1 h-full bg-linear-to-b ${app.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
-                            <div className="p-8 flex-1 bg-white/40 dark:bg-[#0B0B15]/40 rounded-xl h-full flex flex-col">
-                                <div className="flex justify-between items-start mb-6">
-                                    <div className={`text-2xl font-bold bg-linear-to-r ${app.color} bg-clip-text text-transparent`}>
-                                        {app.name}
+                    {apps.map((app, idx) => {
+                        // Map app names to their background images
+                        const bgImages = {
+                            "Helix": "/helix-bg.jpg",
+                            "Mito": "/mito-bg.png",
+                            "Hydro": "/hydro-bg.jpg",
+                            "Black Panther": "/blackpanther-bg.jpg"
+                        };
+
+                        const hasBgImage = bgImages[app.name];
+
+                        return (
+                            <a
+                                key={idx}
+                                href={app.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={`glass-card p-1 group flex flex-col h-full cursor-pointer overflow-hidden relative scroll-reveal ${isSectionVisible ? 'is-visible' : ''} block`}
+                                style={{ transitionDelay: `${0.2 + idx * 0.1}s` }}
+                            >
+                                {/* Background image for cards */}
+                                {hasBgImage && (
+                                    <>
+                                        <div
+                                            className="absolute inset-0 bg-cover bg-center opacity-80 group-hover:opacity-90 transition-opacity duration-300"
+                                            style={{ backgroundImage: `url(${bgImages[app.name]})` }}
+                                        ></div>
+                                        <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/50 to-black/30"></div>
+                                    </>
+                                )}
+
+                                <div className={`absolute top-0 left-0 w-1 h-full bg-linear-to-b ${app.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
+                                <div className={`p-8 flex-1 ${hasBgImage ? 'bg-transparent' : 'bg-white/40 dark:bg-[#0B0B15]/40'} rounded-xl h-full flex flex-col relative z-10`}>
+                                    <div className="flex justify-between items-start mb-6">
+                                        <div className={`text-2xl font-bold ${hasBgImage ? 'text-white' : `bg-linear-to-r ${app.color} bg-clip-text text-transparent`}`}>
+                                            {app.name}
+                                        </div>
+                                        <span className={`px-3 py-1 rounded-full text-xs font-semibold ${hasBgImage ? 'bg-white/20 text-white border-white/30' : 'bg-gray-100 dark:bg-white/10 text-gray-600 dark:text-gray-300 border-gray-200 dark:border-white/10'} border`}>
+                                            {app.tag}
+                                        </span>
                                     </div>
-                                    <span className="px-3 py-1 rounded-full text-xs font-semibold bg-gray-100 dark:bg-white/10 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-white/10">
-                                        {app.tag}
-                                    </span>
+                                    <p className={`text-lg leading-relaxed mb-6 flex-1 ${hasBgImage ? 'text-white/90' : 'text-gray-600 dark:text-gray-400'}`}>
+                                        {app.desc}
+                                    </p>
+                                    <div className={`flex items-center text-sm font-semibold ${hasBgImage ? 'text-white group-hover:text-cyan-300' : 'text-gray-900 dark:text-white group-hover:text-inj-blue dark:group-hover:text-inj-teal'} transition-colors`}>
+                                        Launch App <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
+                                    </div>
                                 </div>
-                                <p className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed mb-6 flex-1">
-                                    {app.desc}
-                                </p>
-                                <div className="flex items-center text-sm font-semibold text-gray-900 dark:text-white group-hover:text-inj-blue dark:group-hover:text-inj-teal transition-colors">
-                                    Launch App <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
-                                </div>
-                            </div>
-                        </a>
-                    ))}
+                            </a>
+                        );
+                    })}
                 </div>
             </div>
         </div>

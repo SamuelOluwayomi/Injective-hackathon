@@ -1,0 +1,40 @@
+{
+    "name": "Injective Protocol Overview",
+    "short_name": "Injective",
+    "description": "Injective Protocol - The Future of Decentralized Finance. Built for Ninja Break: Chill Building Weeks hackathon.",
+    "icons": [
+        {
+            "src": "/favicon-16x16.png",
+            "sizes": "16x16",
+            "type": "image/png"
+        },
+        {
+            "src": "/favicon-32x32.png",
+            "sizes": "32x32",
+            "type": "image/png"
+        },
+        {
+            "src": "/favicon-180x180.png",
+            "sizes": "180x180",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/favicon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/favicon-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "theme_color": "#140940",
+    "background_color": "#0B0B15",
+    "display": "standalone",
+    "start_url": "/",
+    "scope": "/"
+}
