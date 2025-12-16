@@ -1,86 +1,220 @@
-import { Zap, Shield, Globe, Layers, TrendingUp, Users, Code, Wallet } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Zap, Shield, Globe, Layers, TrendingUp, Users, Code, Wallet, Rocket } from 'lucide-react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
+
+// --- HOOKS ---
+const useInjectiveTelemetry = () => {
+    const [blockHeight, setBlockHeight] = useState(64231900);
+    const [tps, setTps] = useState(2400);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setBlockHeight(prev => prev + 1);
+            setTps(prev => 2000 + Math.floor(Math.random() * 800));
+        }, 800);
+        return () => clearInterval(interval);
+    }, []);
+
+    return { blockHeight, tps };
+};
+
+const FeatureCard = ({ title, description, icon: Icon, children, className, href, delay }) => (
+    <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`group relative p-8 rounded-3xl bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 backdrop-blur-sm hover:-translate-y-1 hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 flex flex-col overflow-hidden cursor-pointer ${className}`}
+        style={{ transitionDelay: delay }}
+    >
+        {/* Hover Gradient Border Effect */}
+        <div className="absolute inset-0 rounded-3xl border border-transparent group-hover:border-inj-blue/30 transition-colors duration-300 pointer-events-none"></div>
+
+        <div className="flex items-start justify-between mb-6">
+            <div className="w-12 h-12 rounded-2xl bg-gray-50 dark:bg-white/5 flex items-center justify-center text-inj-blue dark:text-inj-teal group-hover:scale-110 group-hover:bg-inj-blue/10 transition-all duration-300 shadow-sm">
+                <Icon className="w-6 h-6" />
+            </div>
+            {/* Subtle Glow Check */}
+            <div className="w-2 h-2 rounded-full bg-inj-blue shadow-[0_0_10px_rgba(59,130,246,0.5)] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        </div>
+
+        <h3 className="text-2xl font-bold mb-3 text-gray-900 dark:text-white group-hover:text-inj-blue dark:group-hover:text-inj-teal transition-colors">
+            {title}
+        </h3>
+        <p className="text-gray-600 dark:text-gray-400 text-base leading-relaxed mb-6">
+            {description}
+        </p>
+
+        {/* Slot for Telemetry/Extra Content */}
+        <div className="mt-auto">
+            {children}
+        </div>
+    </a>
+);
 
 const Features = () => {
     const [sectionRef, isSectionVisible] = useScrollReveal();
+    const { blockHeight, tps } = useInjectiveTelemetry();
 
-    const features = [
-        {
-            icon: <Zap className="w-6 h-6" />,
-            title: "Lightning Fast",
-            description: "Sub-second block finality with instant transaction confirmation",
-            url: "https://docs.injective.network/"
-        },
-        {
-            icon: <Shield className="w-6 h-6" />,
-            title: "Fully Decentralized",
-            description: "Built on Cosmos SDK with complete on-chain orderbook",
-            url: "https://hub.injective.network/"
-        },
-        {
-            icon: <Globe className="w-6 h-6" />,
-            title: "Cross-Chain",
-            description: "Native interoperability across 50+ blockchain networks",
-            url: "https://bridge.injective.network/"
-        },
-        {
-            icon: <Layers className="w-6 h-6" />,
-            title: "DeFi Native",
-            description: "Advanced derivatives, spot trading, and perpetual markets",
-            url: "https://injhub.com/ecosystem/"
-        }
+    // Randomized floating elements configuration (Copied from Hero)
+    const floatingIcons = [
+        { Icon: Zap, className: "w-12 h-12 text-blue-500 dark:text-blue-400", top: "10%", left: "5%", anim: "animate-float", delay: "0s" },
+        { Icon: Rocket, className: "w-8 h-8 text-purple-400 dark:text-purple-300 -rotate-12", top: "30%", left: "15%", anim: "animate-float-delayed", delay: "2s" },
+        { Icon: Zap, className: "w-6 h-6 text-cyan-400 dark:text-cyan-300", top: "60%", left: "8%", anim: "animate-pulse-slow", delay: "1s" },
+        { Icon: Rocket, className: "w-10 h-10 text-pink-500 dark:text-pink-400 rotate-45", top: "80%", left: "12%", anim: "animate-float-chaotic", delay: "0.5s" },
+        { Icon: Zap, className: "w-4 h-4 text-white/50", top: "40%", left: "25%", anim: "animate-float-fast", delay: "3s" },
+        { Icon: Rocket, className: "w-12 h-12 text-purple-500 dark:text-purple-400 rotate-12", top: "15%", right: "10%", anim: "animate-float-delayed", delay: "1s" },
+        { Icon: Zap, className: "w-8 h-8 text-blue-400 dark:text-blue-300", top: "45%", right: "15%", anim: "animate-float", delay: "0.5s" },
+        { Icon: Rocket, className: "w-6 h-6 text-indigo-400 dark:text-indigo-300 -rotate-45", top: "70%", right: "8%", anim: "animate-float-chaotic", delay: "2.5s" },
+        { Icon: Zap, className: "w-5 h-5 text-teal-400 dark:text-teal-300", top: "85%", right: "20%", anim: "animate-pulse-slow", delay: "1.5s" },
+        { Icon: Rocket, className: "w-14 h-14 text-blue-600/20 dark:text-blue-400/20 blur-[1px]", top: "5%", right: "25%", anim: "animate-float-diagonal", delay: "0s" },
     ];
 
     const stats = [
-        { label: "Total Value Locked", value: "$3.5B+", icon: <TrendingUp className="w-5 h-5" /> },
-        { label: "Active Users", value: "350K+", icon: <Users className="w-5 h-5" /> },
-        { label: "Daily Transactions", value: "2.5M+", icon: <Code className="w-5 h-5" /> },
-        { label: "Supported Assets", value: "300+", icon: <Wallet className="w-5 h-5" /> }
+        { label: "Total Value Locked", value: "$3.5B+", icon: TrendingUp },
+        { label: "Active Users", value: "350K+", icon: Users },
+        { label: "Daily Transactions", value: "2.5M+", icon: Code },
+        { label: "Supported Assets", value: "300+", icon: Wallet }
     ];
 
     return (
-        <div ref={sectionRef} className="py-24 relative overflow-hidden">
+        <div ref={sectionRef} className="py-24 relative overflow-hidden bg-gray-50/50 dark:bg-[#0B1221]">
+            {/* Animated Background Elements (from Hero) */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
+                {/* Gradient Orbs */}
+                <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/10 dark:bg-blue-500/5 rounded-full blur-3xl animate-float"></div>
+                <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/10 dark:bg-purple-500/5 rounded-full blur-3xl animate-float-delayed"></div>
+
+                {/* Floating Grid Lines */}
+                <div className="h-full w-full" style={{
+                    backgroundImage: 'linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px), linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px)',
+                    backgroundSize: '60px 60px',
+                    animation: 'grid-flow 20s linear infinite'
+                }}></div>
+
+                {/* Randomized Floating Icons Layer */}
+                {floatingIcons.map((item, idx) => (
+                    <div
+                        key={idx}
+                        className={`absolute ${item.anim} opacity-30 dark:opacity-40`}
+                        style={{
+                            top: item.top,
+                            left: item.left,
+                            right: item.right,
+                            animationDelay: item.delay
+                        }}
+                    >
+                        <item.Icon className={item.className} />
+                    </div>
+                ))}
+            </div>
+
             <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
                 <div className={`text-center max-w-3xl mx-auto mb-16 scroll-reveal ${isSectionVisible ? 'is-visible' : ''}`}>
                     <h2 className="text-3xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white">
-                        Engineered for <span className="text-inj-teal">Performance</span>
+                        Engineered for <span className="bg-linear-to-r from-inj-blue to-inj-teal bg-clip-text text-transparent">Performance</span>
                     </h2>
-                    <p className="text-lg text-gray-600 dark:text-gray-300">
+                    <p className="text-lg text-gray-600 dark:text-gray-400">
                         Built from the ground up to deliver institutional-grade trading infrastructure with unparalleled speed and security.
                     </p>
                 </div>
 
-                {/* Features Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
-                    {features.map((feature, idx) => (
-                        <a
-                            key={idx}
-                            href={feature.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className={`glass-card p-6 hover:scale-105 transition-all duration-300 scroll-reveal ${isSectionVisible ? 'is-visible' : ''} block cursor-pointer`}
-                            style={{ transitionDelay: `${idx * 0.1}s` }}
-                        >
-                            <div className="w-12 h-12 rounded-xl bg-linear-to-br from-inj-teal to-inj-blue flex items-center justify-center text-white mb-4">
-                                {feature.icon}
+                {/* Bento Grid */}
+                <div className={`grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[minmax(300px,auto)] mb-24 scroll-reveal ${isSectionVisible ? 'is-visible' : ''}`}>
+
+                    {/* Card 1: Lightning Fast (Long Vertical) */}
+                    <FeatureCard
+                        title="Lightning Fast"
+                        description="Sub-second block finality with instant transaction confirmation."
+                        icon={Zap}
+                        className="md:row-span-2 bg-linear-to-b from-white to-gray-50 dark:from-white/5 dark:to-transparent"
+                        href="https://docs.injective.network/"
+                        delay="0s"
+                    >
+                        {/* Live Telemetry Panel */}
+                        <div className="p-4 rounded-xl bg-gray-100 dark:bg-black/40 border border-gray-200 dark:border-white/10 font-mono text-xs text-gray-500 dark:text-slate-400">
+                            <div className="flex justify-between mb-2">
+                                <span>Block Height</span>
+                                <span className="text-inj-blue dark:text-[#00F2FE]">{blockHeight.toLocaleString()}</span>
                             </div>
-                            <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">{feature.title}</h3>
-                            <p className="text-gray-600 dark:text-gray-300 text-sm">{feature.description}</p>
-                        </a>
-                    ))}
+                            <div className="flex justify-between mb-3">
+                                <span>Avg. Block Time</span>
+                                <span className="text-green-500">0.8s</span>
+                            </div>
+                            {/* Live Sync Bar */}
+                            <div className="w-full h-1 bg-gray-200 dark:bg-white/10 rounded-full overflow-hidden relative">
+                                <div className="absolute inset-0 bg-linear-to-r from-transparent via-inj-blue to-transparent w-1/2 animate-[shimmer_1.5s_infinite_linear]" />
+                            </div>
+                            <div className="text-[10px] text-right mt-2 text-gray-400 dark:text-slate-600 flex items-center justify-end gap-1">
+                                <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+                                Live Sync
+                            </div>
+                        </div>
+                    </FeatureCard>
+
+                    {/* Card 2: Cross-Chain (Wide) */}
+                    <FeatureCard
+                        title="Cross-Chain"
+                        description="Native interoperability across 50+ blockchain networks via IBC and Wormhole."
+                        icon={Globe}
+                        className="md:col-span-2"
+                        href="https://bridge.injective.network/"
+                        delay="0.1s"
+                    >
+                        <div className="flex flex-wrap gap-2 mt-2">
+                            {['Ethereum', 'Solana', 'Cosmos', 'Avalanche', 'Arbitrum'].map((chain) => (
+                                <span key={chain} className="px-3 py-1 rounded-full bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-xs text-gray-600 dark:text-slate-300 font-medium">
+                                    {chain}
+                                </span>
+                            ))}
+                            <span className="px-3 py-1 rounded-full bg-blue-50 dark:bg-[#00F2FE]/10 border border-blue-100 dark:border-[#00F2FE]/20 text-xs text-inj-blue dark:text-[#00F2FE] animate-pulse">
+                                +45 More
+                            </span>
+                        </div>
+                    </FeatureCard>
+
+                    {/* Card 3: Fully Decentralized */}
+                    <FeatureCard
+                        title="Fully Decentralized"
+                        description="Built on Cosmos SDK with a complete on-chain orderbook. MEV resistant."
+                        icon={Shield}
+                        href="https://hub.injective.network/"
+                        delay="0.2s"
+                    />
+
+                    {/* Card 4: DeFi Native */}
+                    <FeatureCard
+                        title="DeFi Native"
+                        description="Advanced derivatives, spot trading, and perpetual markets modules."
+                        icon={Layers}
+                        href="https://injhub.com/ecosystem/"
+                        delay="0.3s"
+                    />
                 </div>
 
-                {/* Stats */}
-                <div className={`grid grid-cols-2 md:grid-cols-4 gap-8 scroll-reveal ${isSectionVisible ? 'is-visible' : ''}`} style={{ transitionDelay: '0.4s' }}>
-                    {stats.map((stat, idx) => (
-                        <div key={idx} className="text-center">
-                            <div className="flex items-center justify-center gap-2 mb-2 text-inj-blue dark:text-inj-teal">
-                                {stat.icon}
-                                <div className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">{stat.value}</div>
+                {/* Stats Dashboard (Telemetry Style) */}
+                <div className={`relative rounded-3xl bg-white/50 dark:bg-white/5 border border-gray-200 dark:border-white/10 backdrop-blur-md p-8 md:p-10 overflow-hidden scroll-reveal ${isSectionVisible ? 'is-visible' : ''}`} style={{ transitionDelay: '0.4s' }}>
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 relative z-10">
+                        {stats.map((stat, idx) => (
+                            <div key={idx} className="flex flex-col gap-2 group">
+                                <div className="flex items-center gap-3 text-inj-blue dark:text-inj-teal mb-1">
+                                    <stat.icon className="w-5 h-5" />
+                                    <span className="text-xs font-mono font-medium text-gray-500 dark:text-gray-400 uppercase tracking-widest">{stat.label}</span>
+                                    {/* Add a subtle live indicator to the first stat or all */}
+                                    {idx === 2 && (
+                                        <span className="flex h-2 w-2 relative">
+                                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                                            <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                                        </span>
+                                    )}
+                                </div>
+                                <div className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white font-mono tracking-tight group-hover:text-inj-blue dark:group-hover:text-inj-teal transition-colors duration-300">
+                                    {stat.label === "Daily Transactions" ? tps.toLocaleString() : stat.value}
+                                </div>
+                                {/* Divider for mobile/tablet visual separation */}
+                                <div className="w-full h-px bg-gray-200 dark:bg-white/5 mt-4 lg:hidden"></div>
                             </div>
-                            <div className="text-sm text-gray-500 dark:text-gray-400 uppercase tracking-wider">{stat.label}</div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </div>
             </div>
         </div>

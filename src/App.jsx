@@ -3,9 +3,13 @@ import { Analytics } from "@vercel/analytics/react";
 import LoadingFallback from "./components/LoadingFallback";
 
 // Lazy load components for better performance
+// Lazy load components for better performance
 const Hero = lazy(() => import("./components/Hero"));
 const Features = lazy(() => import("./components/Features"));
+const InjectiveEcosystemOverview = lazy(() => import("./components/InjectiveEcosystemOverview"));
 const Ecosystem = lazy(() => import("./components/Ecosystem"));
+const InjectiveNetworkStats = lazy(() => import("./components/InjectiveNetworkStats"));
+const InjectiveExplorer = lazy(() => import("./components/InjectiveExplorer"));
 const Ninjalabs = lazy(() => import("./components/Ninjalabs"));
 const Footer = lazy(() => import("./components/Footer"));
 const ThemeToggle = lazy(() => import("./components/ThemeToggle"));
@@ -26,7 +30,10 @@ export default function App() {
         <div className="relative z-10">
           <Hero />
           <Features />
+          <InjectiveEcosystemOverview />
           <Ecosystem />
+          <InjectiveNetworkStats />
+          <InjectiveExplorer />
           <Ninjalabs />
           <Footer />
         </div>
