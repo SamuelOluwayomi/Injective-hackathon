@@ -1,20 +1,9 @@
 import { Zap, Rocket, Code, TrendingUp, Users, Wallet, Globe } from 'lucide-react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
+import BackgroundEffects from './BackgroundEffects';
 
 const Ecosystem = () => {
     const [sectionRef, isSectionVisible] = useScrollReveal();
-
-    // Randomized floating elements configuration (Copied from Hero)
-    const floatingIcons = [
-        { Icon: Zap, className: "w-12 h-12 text-blue-500 dark:text-blue-400", top: "10%", left: "5%", anim: "animate-float", delay: "0s" },
-        { Icon: Rocket, className: "w-8 h-8 text-purple-400 dark:text-purple-300 -rotate-12", top: "30%", left: "15%", anim: "animate-float-delayed", delay: "2s" },
-        { Icon: Zap, className: "w-6 h-6 text-cyan-400 dark:text-cyan-300", top: "60%", left: "8%", anim: "animate-pulse-slow", delay: "1s" },
-        { Icon: Rocket, className: "w-10 h-10 text-pink-500 dark:text-pink-400 rotate-45", top: "80%", left: "12%", anim: "animate-float-chaotic", delay: "0.5s" },
-        { Icon: Zap, className: "w-4 h-4 text-white/50", top: "40%", left: "25%", anim: "animate-float-fast", delay: "3s" },
-        // Reduced count slightly for Ecosystem to not be too busy
-        { Icon: Rocket, className: "w-12 h-12 text-purple-500 dark:text-purple-400 rotate-12", top: "15%", right: "10%", anim: "animate-float-delayed", delay: "1s" },
-        { Icon: Zap, className: "w-8 h-8 text-blue-400 dark:text-blue-300", top: "45%", right: "15%", anim: "animate-float", delay: "0.5s" },
-    ];
 
     const apps = [
         { name: "Helix", desc: "The premier decentralized exchange for trading cross-chain crypto assets.", color: "from-blue-500 to-cyan-500", tag: "DEX", url: "https://helixapp.com" },
@@ -25,35 +14,7 @@ const Ecosystem = () => {
 
     return (
         <div ref={sectionRef} className="py-24 relative overflow-hidden bg-gray-50/50 dark:bg-[#0B1221]">
-            {/* Animated Background Elements */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
-                {/* Gradient Orbs */}
-                <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/10 dark:bg-blue-500/5 rounded-full blur-3xl animate-float"></div>
-                <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/10 dark:bg-purple-500/5 rounded-full blur-3xl animate-float-delayed"></div>
-
-                {/* Floating Grid Lines */}
-                <div className="h-full w-full" style={{
-                    backgroundImage: 'linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px), linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px)',
-                    backgroundSize: '60px 60px',
-                    animation: 'grid-flow 20s linear infinite'
-                }}></div>
-
-                {/* Randomized Floating Icons Layer */}
-                {floatingIcons.map((item, idx) => (
-                    <div
-                        key={idx}
-                        className={`absolute ${item.anim} opacity-20 dark:opacity-30`} // Slightly lower opacity for Ecosystem
-                        style={{
-                            top: item.top,
-                            left: item.left,
-                            right: item.right,
-                            animationDelay: item.delay
-                        }}
-                    >
-                        <item.Icon className={item.className} />
-                    </div>
-                ))}
-            </div>
+            <BackgroundEffects />
 
             <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
                 <div className={`flex flex-col md:flex-row justify-between items-end mb-16 gap-6 scroll-reveal ${isSectionVisible ? 'is-visible' : ''}`}>

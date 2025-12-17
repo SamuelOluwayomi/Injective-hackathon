@@ -2,6 +2,8 @@ import React, { Suspense, lazy } from 'react';
 import { Analytics } from "@vercel/analytics/react";
 import LoadingFallback from "./components/LoadingFallback";
 
+import BackgroundEffects from "./components/BackgroundEffects";
+
 // Lazy load components for better performance
 // Lazy load components for better performance
 const Hero = lazy(() => import("./components/Hero"));
@@ -16,7 +18,7 @@ const ThemeToggle = lazy(() => import("./components/ThemeToggle"));
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-[#0B0B15] text-gray-900 dark:text-white transition-colors duration-300 relative overflow-hidden font-sans selection:bg-inj-teal selection:text-black">
+    <div className="min-h-screen text-gray-900 dark:text-white transition-colors duration-300 relative overflow-hidden font-sans selection:bg-inj-teal selection:text-black">
 
       {/* Dynamic Background Gradients */}
       <div className="fixed inset-0 pointer-events-none z-0">
