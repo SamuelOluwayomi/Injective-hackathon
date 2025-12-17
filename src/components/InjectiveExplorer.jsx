@@ -67,7 +67,7 @@ export default function InjectiveExplorer() {
     };
 
     return (
-        <section ref={sectionRef} className="max-w-7xl mx-auto px-6 pb-24 relative">
+        <section ref={sectionRef} className="max-w-7xl mx-auto px-3 md:px-6 pb-24 relative">
             {/* Background Decoration */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-30">
                 <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
@@ -141,7 +141,7 @@ export default function InjectiveExplorer() {
                     ) : (
                         <>
                             {/* Table Header */}
-                            <div className="grid grid-cols-12 gap-2 md:gap-4 px-6 py-4 text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider bg-linear-to-r from-gray-50 to-gray-100 dark:from-white/5 dark:to-white/10 border-b border-gray-200 dark:border-white/10">
+                            <div className="grid grid-cols-12 gap-2 md:gap-4 px-3 md:px-6 py-4 text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider bg-linear-to-r from-gray-50 to-gray-100 dark:from-white/5 dark:to-white/10 border-b border-gray-200 dark:border-white/10">
                                 {activeTab === 'blocks' ? (
                                     <>
                                         <div className="col-span-4 md:col-span-2 flex items-center gap-2">
@@ -171,7 +171,7 @@ export default function InjectiveExplorer() {
                             </div>
 
                             {/* Pending/Loading Row with pulse effect */}
-                            <div className="grid grid-cols-12 gap-2 md:gap-4 px-6 py-5 animate-pulse bg-linear-to-r from-cyan-500/5 to-blue-500/5 border-l-4 border-cyan-400/50">
+                            <div className="grid grid-cols-12 gap-2 md:gap-4 px-3 md:px-6 py-5 animate-pulse bg-linear-to-r from-cyan-500/5 to-blue-500/5 border-l-4 border-cyan-400/50">
                                 {activeTab === 'blocks' ? (
                                     <>
                                         <div className="col-span-4 md:col-span-2"><div className="w-20 h-5 bg-gray-200 dark:bg-white/10 rounded-lg"></div></div>
@@ -193,12 +193,12 @@ export default function InjectiveExplorer() {
                                 {(activeTab === 'blocks' ? blocks : txs).map((item, idx) => (
                                     <div
                                         key={idx}
-                                        className="grid grid-cols-12 gap-2 md:gap-4 px-6 py-5 hover:bg-linear-to-r hover:from-blue-500/5 hover:to-purple-500/5 transition-all duration-300 group border-l-4 border-transparent hover:border-cyan-400 items-center"
+                                        className="grid grid-cols-12 gap-2 md:gap-4 px-3 md:px-6 py-5 hover:bg-linear-to-r hover:from-blue-500/5 hover:to-purple-500/5 transition-all duration-300 group border-l-4 border-transparent hover:border-cyan-400 items-center"
                                         style={{ animation: `fadeIn 0.5s ease-out ${idx * 0.1}s both` }}
                                     >
                                         {activeTab === 'blocks' ? (
                                             <>
-                                                <div className="col-span-4 md:col-span-2">
+                                                <div className="col-span-4 md:col-span-2 min-w-0">
                                                     <a
                                                         href={`https://explorer.injective.network/block/${item.height}`}
                                                         target="_blank"
@@ -209,7 +209,7 @@ export default function InjectiveExplorer() {
                                                         {item.height}
                                                     </a>
                                                 </div>
-                                                <div className="col-span-5 md:col-span-5 flex items-center">
+                                                <div className="col-span-5 md:col-span-5 flex items-center min-w-0">
                                                     <div className="px-2 md:px-3 py-1 md:py-1.5 bg-gray-100 dark:bg-white/5 rounded-lg border border-gray-200 dark:border-white/10 truncate text-xs md:text-sm font-medium text-gray-700 dark:text-gray-300">
                                                         {item.moniker || truncate(item.proposer)}
                                                     </div>
@@ -231,7 +231,7 @@ export default function InjectiveExplorer() {
                                             </>
                                         ) : (
                                             <>
-                                                <div className="col-span-4 md:col-span-3">
+                                                <div className="col-span-4 md:col-span-3 min-w-0">
                                                     <a
                                                         href={`https://explorer.injective.network/transaction/${item.hash}`}
                                                         target="_blank"
@@ -242,7 +242,7 @@ export default function InjectiveExplorer() {
                                                         {truncate(item.hash, 4, 4)}
                                                     </a>
                                                 </div>
-                                                <div className="col-span-5 md:col-span-7 flex flex-wrap items-center gap-2">
+                                                <div className="col-span-5 md:col-span-7 flex flex-wrap items-center gap-2 min-w-0">
                                                     {(item.tx_msg_types || []).slice(0, 1).map((type, i) => (
                                                         <span
                                                             key={i}
@@ -272,7 +272,7 @@ export default function InjectiveExplorer() {
                     )}
 
                     {/* Footer */}
-                    <div className="px-6 py-5 bg-linear-to-r from-gray-50 to-gray-100 dark:from-white/5 dark:to-white/10 border-t border-gray-200 dark:border-white/10 flex justify-center">
+                    <div className="px-3 md:px-6 py-5 bg-linear-to-r from-gray-50 to-gray-100 dark:from-white/5 dark:to-white/10 border-t border-gray-200 dark:border-white/10 flex justify-center">
                         <a
                             href="https://explorer.injective.network"
                             target="_blank"
